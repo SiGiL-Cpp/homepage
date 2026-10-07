@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SiGiL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1428; --ink:#d7dde6; --mute:#7f8da3; --line:#25324b; --accent:#8fa3bf;
+  --chroma:#6a9bf0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){--bg:#eef1f5;--ink:#16203a;--mute:#5b6881;--line:#cdd5e1;--accent:#44546f;--chroma:#2f66d0}
+}
+:root[data-theme="light"]{--bg:#eef1f5;--ink:#16203a;--mute:#5b6881;--line:#cdd5e1;--accent:#44546f;--chroma:#2f66d0}
+:root[data-theme="dark"]{--bg:#0b1428;--ink:#d7dde6;--mute:#7f8da3;--line:#25324b;--accent:#8fa3bf;--chroma:#6a9bf0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 1.125rem/1.6 "Newsreader",Georgia,serif;
+  min-height:100vh;display:flex;justify-content:center}
+main{width:100%;max-width:34rem;padding:12vh 1.5rem 4rem}
+.brand{display:flex;align-items:center;gap:clamp(1rem,4vw,1.75rem);margin-bottom:2.25rem}
+.mark{width:clamp(5.5rem,26vw,8rem);height:auto;flex:none;display:block}
+h1{font-weight:300;font-size:clamp(2.75rem,11vw,4.25rem);line-height:1;margin:0;letter-spacing:.02em}
+.brand{position:relative}
+#word{transition:color .6s}
+#word.dim{color:var(--mute)}
+.k{cursor:default}
+#word.dim .k.on{color:var(--ink)}
+.base{transition:opacity .6s}
+.mark.dim .base{opacity:.3}
+.lit{opacity:0;transition:opacity .6s;pointer-events:none}
+.lit.on{opacity:1}
+#tip{position:absolute;top:100%;left:0;margin-top:.4rem;font-size:1rem;font-style:italic;color:var(--mute);opacity:0;pointer-events:none;transition:opacity .5s;z-index:2;white-space:nowrap}
+#tip.c{color:color-mix(in srgb,var(--d) 78%,#fff)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) #tip.c{color:color-mix(in srgb,var(--l) 78%,#000)}}
+:root[data-theme="light"] #tip.c{color:color-mix(in srgb,var(--l) 78%,#000)}
+#tip.show{opacity:1}
+#tip b{font-weight:400;font-style:normal;color:var(--ink)}
+.lede{color:var(--mute);margin:0 0 3rem;font-style:italic}
+ul{list-style:none;margin:0;padding:0}
+li{border-top:1px solid var(--line)}
+li:last-child{border-bottom:1px solid var(--line)}
+a.item{display:block;padding:1.1rem 0;color:inherit;text-decoration:none}
+.name{font-size:1.25rem;font-weight:400;border-bottom:1px solid transparent}
+.desc{display:block;color:var(--mute);font-size:1rem}
+a.item:hover .name,a.item:focus-visible .name{border-bottom-color:var(--chroma)}
+a.item:focus-visible{outline:2px solid var(--chroma);outline-offset:4px}
+.kind{color:var(--mute);font-size:.85rem;font-style:italic;margin-left:.4rem}
+footer{margin-top:2.5rem;color:var(--mute);font-size:.95rem;display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:baseline}
+#socials{display:flex;gap:1rem}
+#socials a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+#socials a:hover,#socials a:focus-visible{color:var(--ink);border-bottom-color:var(--chroma);outline:none}
+</style>
+</head>
+<body>
+<main>
+  <header class="brand"><svg class="mark" viewBox="24 99 322 204" role="img" aria-label="SiGiL mark"><g transform="translate(29,44.658509)" ><defs><clipPath id="cut-S"><polygon points="-50,-50 400,-50 400,232.62 156.02,232.62 144.47,252.62 144.47,300 -50,300"/></clipPath><clipPath id="cut-L"><rect x="-50" y="-50" width="500" height="282.62"/></clipPath><mask id="m-S" maskUnits="userSpaceOnUse" x="-50" y="-50" width="500" height="400"><path d="M146 69.37 L106.03 69.37 L156.02 156.02 L106.03 242.62 L156.02 242.62" fill="none" stroke="#fff" stroke-width="20" stroke-linejoin="miter" clip-path="url(#cut-S)"/></mask><mask id="m-G" maskUnits="userSpaceOnUse" x="-50" y="-50" width="500" height="400"><path d="M98.9 57 L206 242.62 L106.03 242.62 L213.1 57" fill="none" stroke="#fff" stroke-width="20" stroke-linejoin="miter"/></mask><mask id="m-L" maskUnits="userSpaceOnUse" x="-50" y="-50" width="500" height="400"><path d="M98.9 57 L206 242.62 M106.03 242.62 L156.02 156.02" fill="none" stroke="#fff" stroke-width="20" stroke-linejoin="miter" clip-path="url(#cut-L)"/></mask></defs><g class="base"><g id="art"> <path style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#828c92;fill-opacity:1;enable-background:accumulate;stop-color:#000000" d="m 0.22621995,59.37475 11.54700505,20 h 88.453335 l 38.46875,66.65039 H 50.253846 l 11.547003,19.99999 h 76.906181 l -38.45319,66.60253 11.54561,19.99759 88.41296,-0.0205 11.54824,-20.002 -38.42862,-66.57757 h 76.8671 l 11.54703,-20.00004 h -88.3985 l 38.48046,-66.650391 h 88.39866 l 11.547,-20 H 178.43952 l -11.54701,20 h 21.84186 L 156.02148,136.0349 123.31641,79.37475 h 21.79107 l -11.547,-20 z M 156.01953,176.03881 l 32.65039,56.56835 -65.32031,0.0156 z" /> <path style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#828c92;fill-opacity:1;enable-background:accumulate;stop-color:#000000" d="M 5.4414062,62.384766 13.511719,76.365234 H 101.96484 L 143.9082,149.03516 H 55.46875 l 8.070312,13.98046 h 80.380858 l -40.18945,69.61133 9.80664,16.98828 84.9375,-0.0195 9.81055,-16.99218 -40.16602,-69.5879 h 80.3418 l 8.07031,-13.98046 h -88.39648 l 41.95507,-72.669926 h 88.39844 l 8.07031,-13.980468 H 206 180.17773 l -8.07031,13.980468 h 21.83985 L 156.02148,142.05664 118.10352,76.365234 h 21.78906 L 131.82227,62.384766 H 106 Z M 156.01953,170.01758 l 37.86328,65.59765 -75.74804,0.0195 z" /> <path style="opacity:0.666;mix-blend-mode:hard-light;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="M 0.22621995,59.374748 5.4414062,62.384765 H 131.82227 l 1.73821,-3.010017 z" /> <path style="opacity:0.333;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 133.56048,59.374748 -1.73821,3.010017 8.07031,13.980469 5.2149,3.009516 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="M 0.22622341,59.374748 11.773225,79.37475 h 88.453335 l 38.46875,66.65039 5.21289,3.01001 -41.94336,-72.669916 H 13.511718 L 5.4414062,62.384765 Z" /> <path style="opacity:0.666;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 50.253846,146.02514 5.214903,3.01001 H 143.9082 l -5.21289,-3.01001 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 50.253846,146.02514 11.547002,19.99999 h 76.906182 l 5.21289,-3.00951 H 63.539062 l -8.070313,-13.98047 z" /> <path style="opacity:0.333;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 143.91992,163.01562 -5.21289,3.00951 -38.45319,66.60253 3.47663,-8e-4 z" /> <path style="opacity:0.666;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 123.34961,232.62276 -5.21485,3.012 75.74805,-0.0195 -5.21289,-3.00808 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 145.10748,79.37475 -5.2149,-3.009516 h -21.78907 l 5.2129,3.009516 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 103.73047,232.62686 -3.47663,7.9e-4 11.54561,19.99759 88.41296,-0.0205 11.54824,-20.002 -3.4755,7.9e-4 -9.81054,16.99219 -84.9375,0.0195 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 123.34961,232.62276 -5.21485,3.012 37.88477,-65.61718 37.86328,65.59768 -5.21289,-3.00808 -32.65039,-56.56837 z" /> <path style="opacity:0.333;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 118.10351,76.365234 37.91797,65.691406 37.92578,-65.691406 -5.21289,3.009514 -32.71289,56.660152 -32.70507,-56.66015 z" /> <path style="opacity:0.333;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 180.17773,62.384765 -1.73821,-3.010017 -11.54701,20 5.21491,-3.009514 z" /> <path style="opacity:0.333;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 168.11914,163.01562 40.16601,69.58791 3.4755,-8e-4 -38.42862,-66.57756 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 166.89251,79.374748 h 21.84186 l 5.21289,-3.009514 h -21.83984 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 311.77378,59.374748 -5.21518,3.010017 -8.07032,13.980469 h -88.39844 l -41.95508,72.669916 5.2129,-3.01001 38.48046,-66.650392 h 88.39866 z" /> <path style="opacity:0.333;fill:#000000;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 261.74616,146.02514 -5.21491,3.01001 -8.07032,13.98047 h -80.34179 l 5.21289,3.00956 h 76.8671 z" /> <path style="opacity:0.666;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 178.43952,59.374748 1.73821,3.010017 H 306.5586 l 5.21518,-3.010017 z" /> <path style="opacity:0.666;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:20;stroke-dasharray:none;stroke-opacity:1" d="m 168.13476,149.03515 h 88.39649 l 5.21491,-3.01001 h -88.3985 z" /> </g></g><g class="lit" id="lit-S" mask="url(#m-S)"><use href="#art"/></g><g class="lit" id="lit-G" mask="url(#m-G)"><use href="#art"/></g><g class="lit" id="lit-L" mask="url(#m-L)"><use href="#art"/></g></g></svg><h1 id="word"><span class="k" data-k="S">S</span>i<span class="k" data-k="G">G</span>i<span class="k" data-k="L">L</span></h1></header>
+  <p class="lede">Side projects, shared in the hope you'll find some sense in them.</p>
+  <ul id="projects"></ul>
+  <footer><span>Career</span><span id="socials"></span></footer>
+</main>
+
+<script>
+/* To add a project, add one line here. */
+const projects = [
+  { name: "C++Craft",  kind: "course", desc: "A depth-first C++ course that rebuilds the language from the ground up, for those who want to build a robust understanding of the language.", url: "https://cppcraft.sigil.org.uk" },
+  { name: "P4188",     kind: "proposal",   desc: "Extensible Math Functions for C++, a proposal to the ISO C++ committee.", url: "https://wg21.link/p4188" },
+  { name: "RORCAL",    kind: "research",  desc: "Preventing collision-avoidance deadlocks in multiagent navigation for deterministic simulation.", url: "https://zenodo.org/records/18785006" },
+  { name: "Chromato",  kind: "tool",   desc: "Distinct colours for data visualisation, chosen by how people name colours rather than by perceptual distance: what we can name, we can tell apart.", url: "https://chromato.cratie.org/" },
+  { name: "BrainCrafted", kind: "essay", desc: "Preserving human cognitive capacity in the age of AI, in the spirit of William Morris.", url: "https://braincrafted.org/" }
+];
+/* Socials: add one line per profile. */
+const socials = [
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/stephanegros" }
+];
+const so = document.getElementById("socials");
+for (const s of socials) {
+  const a = document.createElement("a");
+  a.href = s.url; a.rel = "me noopener"; a.textContent = s.name;
+  so.appendChild(a);
+}
+/* Triads: one word per letter, sharing a colour (dark-theme / light-theme, from Chromato).
+   Hovering S, G, L in turn within a few seconds stays inside one triad; otherwise a new one is dealt.
+   Now and then a word is borrowed from a nearby triad, so the ORDER of this list is meaningful: keep related triads adjacent. */
+const triads = [
+  { c: ["#1b76fe","#0343df"], S: "structura", G: "generatio", L: "legitime" },
+  { c: ["#e58b2a","#c65102"], S: "sophia", G: "gnosis", L: "logos" },
+  { c: ["#06c2ac","#045c5a"], S: "semantica", G: "gradus", L: "lucidus" },
+  { c: ["#d86bff","#7e1e9c"], S: "single responsibility", G: "generic programming", L: "liskov principle" },
+  { c: ["#8e82fe","#0504aa"], S: "semantic typing", G: "guidelines", L: "layering" },
+  { c: ["#fc5a50","#8b0030"], S: "soundness", G: "guarantee", L: "logic" },
+  { c: ["#13eac9","#0b6b87"], S: "symmetry", G: "geometry", L: "locality" },
+  { c: ["#c79fef","#9a0efa"], S: "spatial awareness", G: "graph", L: "linear algebra" },
+  { c: ["#cece01","#6e750e"], S: "simplicity", G: "go", L: "lattice" },
+  { c: ["#3f9b0b","#085e11"], S: "simulation", G: "gameplay", L: "loop" },
+  { c: ["#ff2222","#ff2222"], S: "strategy", G: "genetic algorithm", L: "legibility" },
+  { c: ["#ff81c0","#b00149"], S: "software", G: "game", L: "language" }
+];
+let deck = [], session = null;
+const WINDOW = 7000, MIX = 0.35, REACH = 2;
+function draw(k) {
+  const now = Date.now();
+  if (!session || now - session.t > WINDOW || session.seen.has(k)) {
+    if (!deck.length) deck = [...triads].sort(() => Math.random() - .5);
+    const triad = deck.pop();
+    session = { triad, idx: triads.indexOf(triad), seen: new Set() };
+  }
+  session.seen.add(k); session.t = now;
+  let tr = session.triad;
+  if (Math.random() < MIX) {
+    const near = [];
+    for (let o = -REACH; o <= REACH; o++) {
+      const j = session.idx + o;
+      if (o !== 0 && j >= 0 && j < triads.length) near.push(triads[j]);
+    }
+    tr = near[Math.floor(Math.random() * near.length)];
+  }
+  return { word: tr[k], d: tr.c[0], l: tr.c[1] };
+}
+const brand = document.querySelector(".brand"), tip = document.createElement("div");
+tip.id = "tip"; tip.setAttribute("aria-hidden", "true"); brand.appendChild(tip);
+let timer, current;
+function showTip(el, delay = 550) {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    if (current) current.classList.remove("on");
+    current = el; el.classList.add("on"); lit(el.dataset.k);
+    const t = draw(el.dataset.k); tip.textContent = t.word; tip.style.setProperty("--d", t.d); tip.style.setProperty("--l", t.l); tip.classList.add("c");
+    const b = brand.getBoundingClientRect(), r = el.getBoundingClientRect();
+    tip.style.left = Math.max(0, Math.min(r.left - b.left, b.width - tip.offsetWidth)) + "px";
+    tip.classList.add("show");
+  }, delay);
+}
+function lit(k) { document.querySelectorAll(".lit.on").forEach(n => n.classList.remove("on")); const n = k && document.getElementById("lit-" + k); if (n) n.classList.add("on"); document.querySelector(".mark").classList.toggle("dim", !!n); document.getElementById("word").classList.toggle("dim", !!n); }
+function hideTip() { clearTimeout(timer); lit(); tip.classList.remove("show"); if (current) current.classList.remove("on"); }
+document.querySelectorAll(".k").forEach(el => {
+  el.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") showTip(el); });
+  el.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") hideTip(); });
+  el.addEventListener("click", e => { e.stopPropagation(); showTip(el, 0); });
+});
+document.addEventListener("click", hideTip);
+const ul = document.getElementById("projects");
+for (const p of projects) {
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.className = "item"; a.href = p.url; a.rel = "noopener";
+  a.innerHTML = '<span class="name"></span> <span class="kind"></span><span class="desc"></span>';
+  a.querySelector(".name").textContent = p.name;
+  a.querySelector(".kind").textContent = p.kind;
+  a.querySelector(".desc").textContent = p.desc;
+  li.appendChild(a); ul.appendChild(li);
+}
+</script>
+</body>
+</html>
